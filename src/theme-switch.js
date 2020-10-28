@@ -6,13 +6,13 @@ const Theme = {
 };
 
 const body = document.querySelector('body');
-const themeStatus = localStorage.getItem('Theme');
+const currentTheme = localStorage.getItem('Theme');
 
 function checkTheme() {
-  if (themeStatus === 'DARK') {
+  if (currentTheme === 'DARK') {
     themeSwitcher.checked = true;
     setDarkTheme();
-  } else if (themeStatus === 'LIGHT') {
+  } else {
     themeSwitcher.checked = false;
     setLightTheme();
   }
@@ -33,10 +33,15 @@ function setLightTheme() {
   localStorage.setItem('Theme', 'LIGHT');
 }
 
+// function onThemeSwitcherChange() {
+//   // if (themeSwitcher.checked) {
+//   //   setDarkTheme();
+//   // } else {
+//   //   setLightTheme();
+//   // }
+//   themeSwitcher.checked ? setDarkTheme() : setLightTheme();
+// }
 function onThemeSwitcherChange() {
-  if (themeSwitcher.checked === true) {
-    setDarkTheme();
-  } else if (themeSwitcher.checked === false) {
-    setLightTheme();
-  }
+  themeSwitcher.checked && setDarkTheme();
+  !themeSwitcher.checked && setLightTheme();
 }
